@@ -5,10 +5,10 @@ use pyo3::ffi::Py_uintptr_t;
 use pyo3::prelude::*;
 
 /// Arrow array to Python.
-pub(crate) fn to_py_array<'py>(
+pub(crate) fn to_py_array(
     array: ArrayRef,
-    pyarrow: Bound<'py, PyModule>,
-) -> PyResult<Bound<'py, PyAny>> {
+    pyarrow: Bound<'_, PyModule>,
+) -> PyResult<Bound<'_, PyAny>> {
     let schema = Box::new(ffi::export_field_to_c(&ArrowField::new(
         "".into(),
         array.dtype().clone(),
